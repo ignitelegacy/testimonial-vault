@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonial Vault — Ignite Legacy</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Editors Note';
+  src: url('https://assets.cdn.filesafe.space/wcJWrJ0LKUsg51VQbi8P/media/69c6ee722e89d817b2599f76.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --cream: #f2e7de;
+  --cream-light: #f8f1ea;
+  --cream-dark: #edddcd;
+  --gold: #ad9565;
+  --gold-dark: #9a8968;
+  --gold-muted: #b8a47e;
+  --espresso: #3d3529;
+  --espresso-light: #5a5244;
+  --warm-gray: #8a7e6e;
+  --warm-gray-light: #a09888;
+  --surface: #fffbf7;
+  --font-display: 'Editors Note', Georgia, serif;
+  --font-body: 'Montserrat', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); background: var(--cream); color: var(--espresso); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(154,137,104,0.2); border-radius: 10px; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes scaleIn { from { opacity:0; transform:scale(0.96); } to { opacity:1; transform:scale(1); } }
+
+.vault-header { padding: 48px 32px 32px; max-width: 1200px; margin: 0 auto; animation: fadeUp 0.6s ease; }
+.vault-header-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; margin-bottom: 28px; }
+.vault-eyebrow { font-family: var(--font-body); font-size: 10.5px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.vault-title { font-family: var(--font-display); font-size: 42px; font-weight: normal; color: var(--espresso); line-height: 1.1; }
+.vault-divider { width: 48px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-muted)); border-radius: 2px; margin: 14px 0 4px; }
+.vault-subtitle { font-family: var(--font-body); font-size: 14px; color: var(--warm-gray); margin-top: 10px; max-width: 440px; line-height: 1.6; font-weight: 400; }
+
+.btn-primary { padding: 13px 30px; border-radius: 100px; border: none; background: linear-gradient(135deg, var(--gold-dark), var(--gold-muted)); color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(154,137,104,0.25); transition: all 0.3s; letter-spacing: 0.3px; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(154,137,104,0.35); }
+.btn-secondary { padding: 11px 20px; border-radius: 100px; border: 1.5px solid rgba(154,137,104,0.2); background: transparent; color: var(--gold-dark); font-family: var(--font-body); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.btn-secondary:hover { border-color: var(--gold); }
+.btn-download { padding: 8px 18px; border-radius: 100px; border: 1.5px solid rgba(154,137,104,0.25); background: transparent; color: var(--gold-dark); font-family: var(--font-body); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+.btn-download:hover { background: rgba(154,137,104,0.08); border-color: var(--gold); }
+
+.stats-bar { display: flex; gap: 28px; flex-wrap: wrap; }
+.stat { display: flex; align-items: baseline; gap: 7px; }
+.stat-value { font-family: var(--font-display); font-size: 30px; color: var(--gold); line-height: 1; }
+.stat-label { font-family: var(--font-body); font-size: 10.5px; color: var(--warm-gray-light); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
+
+.filters-section { padding: 0 32px 24px; max-width: 1200px; margin: 0 auto; animation: fadeUp 0.6s ease 0.1s both; }
+.filter-group { margin-bottom: 14px; }
+.filter-label { font-family: var(--font-body); font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--warm-gray-light); margin-bottom: 8px; }
+.filter-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.tag { display: inline-flex; align-items: center; gap: 5px; padding: 7px 15px; border-radius: 100px; border: 1.5px solid rgba(154,137,104,0.15); background: transparent; color: var(--warm-gray); font-size: 12px; font-family: var(--font-body); font-weight: 400; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.tag:hover { border-color: rgba(154,137,104,0.4); }
+.tag.active { border-color: var(--gold-dark); background: rgba(154,137,104,0.1); color: var(--espresso-light); font-weight: 600; }
+.tag-emoji { font-size: 13px; }
+.tag-sm { padding: 4px 10px; font-size: 11px; }
+.tag-sm .tag-emoji { font-size: 11px; }
+
+.search-wrap { position: relative; max-width: 340px; margin-bottom: 16px; }
+.search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--warm-gray-light); }
+.search-input { width: 100%; padding: 11px 16px 11px 42px; border-radius: 100px; border: 1.5px solid rgba(154,137,104,0.12); font-family: var(--font-body); font-size: 13px; color: var(--espresso); background: var(--surface); outline: none; transition: border 0.2s; }
+.search-input:focus { border-color: var(--gold); }
+.search-input::placeholder { color: var(--warm-gray-light); }
+
+.results-count { padding: 0 32px 14px; max-width: 1200px; margin: 0 auto; font-family: var(--font-body); font-size: 12px; color: var(--warm-gray-light); font-weight: 500; }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 0 32px 80px; max-width: 1200px; margin: 0 auto; }
+.card { background: var(--surface); border-radius: 14px; overflow: hidden; cursor: pointer; border: 1px solid rgba(154,137,104,0.08); transition: all 0.35s cubic-bezier(0.4,0,0.2,1); }
+.card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(154,137,104,0.14); }
+
+.card-thumb { height: 155px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.card-thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card-thumb-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.18); display: flex; align-items: center; justify-content: center; z-index: 2; }
+.card-play-btn { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,0.22); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); z-index: 2; transition: transform 0.2s; }
+.card:hover .card-play-btn { transform: scale(1.08); }
+
+.card-body { padding: 16px 18px 18px; }
+.card-tags { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.card-headline { font-family: var(--font-display); font-size: 19px; font-weight: normal; color: var(--espresso); line-height: 1.25; margin-bottom: 8px; }
+.card-quote { font-family: var(--font-body); font-size: 12.5px; color: var(--warm-gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-weight: 400; font-style: italic; }
+.card-author { margin-top: 14px; display: flex; align-items: center; gap: 9px; }
+.card-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 700; font-family: var(--font-body); flex-shrink: 0; }
+.card-author-name { font-family: var(--font-body); font-size: 12.5px; font-weight: 500; color: var(--espresso-light); }
+
+.empty-state { text-align: center; padding: 60px 20px; grid-column: 1 / -1; }
+.empty-icon { font-size: 40px; margin-bottom: 12px; }
+
+.modal-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; background: rgba(30,26,20,0.55); backdrop-filter: blur(6px); padding: 20px; animation: fadeIn 0.2s ease; }
+.modal-box { background: var(--surface); border-radius: 18px; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; animation: scaleIn 0.3s cubic-bezier(0.4,0,0.2,1); }
+.modal-close { width: 30px; height: 30px; border-radius: 50%; border: none; background: rgba(255,255,255,0.22); color: #fff; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+.modal-close:hover { background: rgba(255,255,255,0.35); }
+.modal-close-dark { background: transparent; border: 1px solid rgba(154,137,104,0.2); color: var(--warm-gray); }
+
+.detail-thumb { height: 320px; display: flex; align-items: center; justify-content: center; border-radius: 18px 18px 0 0; position: relative; overflow: hidden; }
+.detail-thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.detail-thumb-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; z-index: 3; cursor: pointer; transition: background 0.3s; }
+.detail-thumb-overlay.playing { background: transparent; }
+.detail-play-btn { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); transition: transform 0.2s; }
+
+.detail-body { padding: 24px 28px 28px; }
+.detail-tags { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.detail-headline { font-family: var(--font-display); font-size: 28px; font-weight: normal; color: var(--espresso); line-height: 1.2; margin-bottom: 16px; }
+.detail-blockquote { font-family: var(--font-body); font-size: 14px; color: var(--espresso-light); line-height: 1.7; padding: 16px 20px; border-left: 3px solid var(--gold-muted); background: rgba(173,149,101,0.05); border-radius: 0 10px 10px 0; font-style: italic; }
+.detail-author { margin-top: 20px; display: flex; align-items: center; gap: 10px; }
+.detail-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #fff; font-weight: 700; font-family: var(--font-body); flex-shrink: 0; }
+.detail-author-name { font-size: 14px; font-weight: 600; color: var(--espresso); }
+.detail-author-date { font-size: 11.5px; color: var(--warm-gray-light); }
+.detail-actions { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(154,137,104,0.1); display: flex; gap: 10px; flex-wrap: wrap; }
+
+.form-header { padding: 26px 28px 0; display: flex; justify-content: space-between; align-items: center; }
+.form-title { font-family: var(--font-display); font-size: 26px; color: var(--espresso); }
+.form-body { padding: 20px 28px 28px; display: flex; flex-direction: column; gap: 18px; }
+.form-label { font-family: var(--font-body); font-size: 10px; font-weight: 600; color: var(--espresso-light); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 6px; display: block; }
+.form-input { width: 100%; padding: 12px 16px; border-radius: 10px; border: 1.5px solid rgba(154,137,104,0.15); font-family: var(--font-body); font-size: 13px; color: var(--espresso); background: var(--cream-light); outline: none; transition: border 0.2s; }
+.form-input:focus { border-color: var(--gold); }
+.form-input::placeholder { color: var(--warm-gray-light); }
+textarea.form-input { min-height: 100px; resize: vertical; }
+.form-hint { font-size: 11px; color: var(--warm-gray-light); margin-top: 5px; line-height: 1.4; }
+
+.upload-zone { border: 2px dashed rgba(154,137,104,0.25); border-radius: 14px; padding: 32px 20px; text-align: center; cursor: pointer; transition: all 0.3s; background: rgba(154,137,104,0.02); }
+.upload-zone:hover { border-color: var(--gold); background: rgba(154,137,104,0.05); }
+.upload-zone.dragover { border-color: var(--gold); background: rgba(154,137,104,0.08); }
+.upload-zone-icon { font-size: 32px; margin-bottom: 8px; }
+.upload-zone-text { font-family: var(--font-body); font-size: 13px; color: var(--warm-gray); font-weight: 500; }
+.upload-zone-sub { font-family: var(--font-body); font-size: 11px; color: var(--warm-gray-light); margin-top: 4px; }
+.upload-zone-file { margin-top: 4px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.upload-zone-filename { font-family: var(--font-body); font-size: 12px; color: var(--gold-dark); font-weight: 600; }
+.upload-zone-remove { background: none; border: none; color: var(--warm-gray); font-size: 14px; cursor: pointer; }
+
+.upload-progress { margin-top: 12px; }
+.upload-progress-bar { height: 4px; background: var(--cream-dark); border-radius: 4px; overflow: hidden; }
+.upload-progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dark), var(--gold-muted)); border-radius: 4px; transition: width 0.3s; }
+.upload-progress-text { font-size: 11px; color: var(--warm-gray); margin-top: 4px; text-align: center; }
+
+.form-submit { margin-top: 4px; width: 100%; padding: 14px 0; border-radius: 100px; border: none; color: #fff; font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+.form-submit.ready { background: linear-gradient(135deg, var(--gold-dark), var(--gold-muted)); }
+.form-submit.disabled { background: var(--cream-dark); cursor: not-allowed; }
+
+.success-box { padding: 48px 40px; text-align: center; }
+.success-icon { font-size: 48px; margin-bottom: 16px; }
+.success-title { font-family: var(--font-display); font-size: 26px; color: var(--espresso); margin-bottom: 8px; }
+.success-sub { font-family: var(--font-body); font-size: 13px; color: var(--warm-gray); margin-bottom: 24px; line-height: 1.5; }
+
+@media (max-width: 640px) {
+  .vault-title { font-size: 32px; }
+  .vault-header { padding: 32px 20px 24px; }
+  .filters-section { padding: 0 20px 20px; }
+  .card-grid { padding: 0 20px 60px; gap: 16px; }
+  .results-count { padding: 0 20px 12px; }
+  .detail-thumb { height: 220px; }
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const CATEGORIES = [
+  { id:"enagic-business", label:"Enagic Business", emoji:"💼" },
+  { id:"enagic-health", label:"Enagic Health", emoji:"💧" },
+  { id:"ignite-legacy", label:"Ignite Legacy", emoji:"🔥" },
+  { id:"community", label:"Community", emoji:"🤝" },
+  { id:"retreat", label:"Retreat", emoji:"✈️" },
+];
+const PERSONAS = [
+  { id:"mom", label:"Mom", emoji:"👩‍👧" },
+  { id:"traveler", label:"Traveler", emoji:"🌍" },
+  { id:"corporate-escapee", label:"Corporate Escapee", emoji:"🏃‍♀️" },
+  { id:"health-seeker", label:"Health Seeker", emoji:"🌿" },
+  { id:"entrepreneur", label:"Entrepreneur", emoji:"⚡" },
+  { id:"student", label:"Student", emoji:"📚" },
+  { id:"couple", label:"Couple", emoji:"💕" },
+  { id:"side-hustler", label:"Side Hustler", emoji:"🌙" },
+];
+const COLORS = ["#c4a882","#8fa89a","#b89a7a","#a89abc","#d4a574","#c9b896","#9aab8f","#c4a0a0"];
+const SAMPLES = [
+  { id:"s1", name:"Jessica M.", category:"enagic-business", persona:"mom", headline:"From stay-at-home mom to six-figure earner", quote:"I never imagined I could build a real business while being present for my kids. Enagic changed everything for our family — financially and in how we show up for each other every day.", thumbnailColor:"#c4a882", date:"2026-03-15" },
+  { id:"s2", name:"Marcus T.", category:"enagic-health", persona:"health-seeker", headline:"My chronic inflammation is gone", quote:"After 8 years of dealing with gut issues and inflammation, switching to Kangen water was the turning point. My doctor was shocked at my bloodwork improvement in just 90 days.", thumbnailColor:"#8fa89a", date:"2026-02-28" },
+  { id:"s3", name:"Priya K.", category:"ignite-legacy", persona:"side-hustler", headline:"Ignite gave me a real launch pad", quote:"I was stuck in analysis paralysis for months. The Ignite Legacy course gave me a clear, step-by-step system. I made my investment back in the first week.", thumbnailColor:"#b89a7a", date:"2026-03-22" },
+  { id:"s4", name:"Sarah & David L.", category:"community", persona:"couple", headline:"We found our people", quote:"The community aspect is what sets this apart. We've built lifelong friendships, traveled together, and supported each other through every milestone.", thumbnailColor:"#a89abc", date:"2026-01-10" },
+  { id:"s5", name:"Tanya R.", category:"enagic-business", persona:"entrepreneur", headline:"From scattered to scalable", quote:"I was doing everything manually. Now I have systems, automations, and a team structure that lets me work 20 hours a week and earn more than I did at 60.", thumbnailColor:"#d4a574", date:"2026-04-01" },
+  { id:"s6", name:"Anika W.", category:"retreat", persona:"traveler", headline:"Bali retreat changed my whole perspective", quote:"I went expecting a nice vacation with some business tips. I came back with a completely restructured vision for my life and business.", thumbnailColor:"#c9b896", date:"2025-11-20" },
+  { id:"s7", name:"Lena C.", category:"enagic-business", persona:"corporate-escapee", headline:"I left my 9-to-5 in 8 months", quote:"I was a marketing director making good money but miserable. Enagic gave me a vehicle to replace my income on my own terms.", thumbnailColor:"#9aab8f", date:"2026-03-05" },
+  { id:"s8", name:"Rachel F.", category:"enagic-health", persona:"mom", headline:"My kids' eczema cleared up completely", quote:"We tried everything. Within 6 weeks of using Kangen water for drinking and bathing, my daughter's skin was completely clear. I cried happy tears.", thumbnailColor:"#c4a0a0", date:"2026-02-14" },
+];
+
+let videoBlobStore = {};
+let state = {
+  testimonials: [...SAMPLES],
+  activeCategory: "all",
+  activePersona: "all",
+  searchQuery: "",
+  showUpload: false,
+  selectedId: null,
+  formSuccess: false,
+  uploadProgress: 0,
+  isUploading: false,
+  form: { name:"", headline:"", quote:"", category:"", persona:"", videoFile:null, videoFileName:"" },
+};
+
+const SK = "ignite-testimonial-vault";
+function load() { try { const s=localStorage.getItem(SK); if(s){const p=JSON.parse(s);if(p.length)state.testimonials=p;} } catch(e){} }
+function save() { try { localStorage.setItem(SK,JSON.stringify(state.testimonials)); } catch(e){} }
+function resetAll() { try{localStorage.removeItem(SK);}catch(e){} videoBlobStore={}; state.testimonials=[...SAMPLES]; render(); }
+
+function getCat(id){return CATEGORIES.find(c=>c.id===id);}
+function getPer(id){return PERSONAS.find(p=>p.id===id);}
+function formatDate(d){return new Date(d).toLocaleDateString("en-US",{month:"long",year:"numeric"});}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;');}
+
+function getFiltered() {
+  return state.testimonials.filter(t => {
+    if(state.activeCategory!=="all" && t.category!==state.activeCategory) return false;
+    if(state.activePersona!=="all" && t.persona!==state.activePersona) return false;
+    if(state.searchQuery){ const q=state.searchQuery.toLowerCase(); return t.name.toLowerCase().includes(q)||t.headline.toLowerCase().includes(q)||t.quote.toLowerCase().includes(q); }
+    return true;
+  });
+}
+
+function tag(label,emoji,active,sm,onclick){
+  return `<button class="tag ${active?'active':''} ${sm?'tag-sm':''}" ${onclick?'onclick="'+onclick+'"':''}><span class="tag-emoji">${emoji}</span>${label}</button>`;
+}
+
+function render() {
+  const items = getFiltered();
+  const t = state.testimonials;
+  const vc = t.filter(x=>videoBlobStore[x.id]).length;
+  const cc = new Set(t.map(x=>x.category)).size;
+
+  let html = `
+  <div class="vault-header">
+    <div class="vault-header-inner">
+      <div>
+        <div class="vault-eyebrow">The Testimonial Vault</div>
+        <h1 class="vault-title">Real Stories, Real Impact</h1>
+        <div class="vault-divider"></div>
+        <p class="vault-subtitle">Browse transformative stories from our community or share your own journey.</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn-secondary" onclick="resetAll()">Reset</button>
+        <button class="btn-primary" onclick="openUpload()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Share Your Story
+        </button>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat"><span class="stat-value">${t.length}</span><span class="stat-label">Stories</span></div>
+      <div class="stat"><span class="stat-value">${vc}</span><span class="stat-label">With Video</span></div>
+      <div class="stat"><span class="stat-value">${cc}</span><span class="stat-label">Categories</span></div>
+    </div>
+  </div>
+
+  <div class="filters-section">
+    <div class="search-wrap">
+      <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" type="text" placeholder="Search stories..." value="${esc(state.searchQuery)}" oninput="state.searchQuery=this.value;render()">
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Category</div>
+      <div class="filter-tags">
+        ${tag('All','✦',state.activeCategory==='all',false,"state.activeCategory='all';render()")}
+        ${CATEGORIES.map(c=>tag(c.label,c.emoji,state.activeCategory===c.id,false,`state.activeCategory='${c.id}';render()`)).join('')}
+      </div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Lifestyle</div>
+      <div class="filter-tags">
+        ${tag('All','✦',state.activePersona==='all',false,"state.activePersona='all';render()")}
+        ${PERSONAS.map(p=>tag(p.label,p.emoji,state.activePersona===p.id,false,`state.activePersona='${p.id}';render()`)).join('')}
+      </div>
+    </div>
+  </div>
+
+  <div class="results-count">${items.length} ${items.length===1?'story':'stories'} found</div>
+
+  <div class="card-grid">
+    ${items.length===0 ? '<div class="empty-state"><div class="empty-icon">🔍</div><div style="font-size:15px;color:var(--warm-gray)">No stories match your filters</div><div style="font-size:12px;color:var(--warm-gray-light);margin-top:4px">Try adjusting your search or filters</div></div>' :
+    items.map((t,i) => {
+      const cat=getCat(t.category), per=getPer(t.persona), hasV=!!videoBlobStore[t.id];
+      const bg=`linear-gradient(135deg,${t.thumbnailColor||'#c4a882'},${t.thumbnailColor||'#c4a882'}cc)`;
+      return `<div class="card" onclick="openDetail('${t.id}')" style="animation:fadeUp 0.5s ease ${i*0.05}s both">
+        <div class="card-thumb" style="background:${bg}">
+          ${hasV?`<video src="${videoBlobStore[t.id]}" muted preload="metadata"></video>`:''}
+          <div class="card-thumb-overlay"><div class="card-play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">${cat?tag(cat.label,cat.emoji,true,true,''):''}${per?tag(per.label,per.emoji,false,true,''):''}</div>
+          <div class="card-headline">${t.headline}</div>
+          <div class="card-quote">"${t.quote}"</div>
+          <div class="card-author"><div class="card-avatar" style="background:linear-gradient(135deg,${t.thumbnailColor||'#c4a882'},#d4c4a8)">${t.name.charAt(0)}</div><span class="card-author-name">${t.name}</span></div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+
+  // Detail modal
+  if (state.selectedId) {
+    const t = state.testimonials.find(x=>x.id===state.selectedId);
+    if (t) {
+      const cat=getCat(t.category), per=getPer(t.persona), hasV=!!videoBlobStore[t.id];
+      const bg=`linear-gradient(135deg,${t.thumbnailColor||'#c4a882'},${t.thumbnailColor||'#c4a882'}bb)`;
+      html += `<div class="modal-overlay" onclick="closeDetail()"><div class="modal-box" style="max-width:620px" onclick="event.stopPropagation()">
+        <div class="detail-thumb" style="background:${bg}">
+          <button class="modal-close" onclick="closeDetail()" style="position:absolute;top:14px;right:14px;z-index:5">✕</button>
+          ${hasV ? `
+            <video id="dv" src="${videoBlobStore[t.id]}" preload="metadata"></video>
+            <div class="detail-thumb-overlay" id="dOverlay" onclick="toggleVideo()">
+              <div class="detail-play-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+          ` : `<div style="display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2">
+            <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="white" opacity="0.4"><path d="M8 5v14l11-7z"/></svg></div>
+            <div style="font-family:var(--font-body);font-size:11px;color:rgba(255,255,255,0.5)">No video uploaded</div>
+          </div>`}
+        </div>
+        <div class="detail-body">
+          <div class="detail-tags">${cat?tag(cat.label,cat.emoji,true,false,''):''}${per?tag(per.label,per.emoji,false,false,''):''}</div>
+          <div class="detail-headline">${t.headline}</div>
+          <div class="detail-blockquote">"${t.quote}"</div>
+          <div class="detail-author">
+            <div class="detail-avatar" style="background:linear-gradient(135deg,${t.thumbnailColor||'#c4a882'},#d4c4a8)">${t.name.charAt(0)}</div>
+            <div><div class="detail-author-name">${t.name}</div><div class="detail-author-date">${formatDate(t.date)}</div></div>
+          </div>
+          ${hasV?`<div class="detail-actions">
+            <a class="btn-download" href="${videoBlobStore[t.id]}" download="${t.name.replace(/\s/g,'_')}_testimonial.mp4" onclick="event.stopPropagation()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Video
+            </a>
+          </div>`:''}
+        </div>
+      </div></div>`;
+    }
+  }
+
+  // Upload modal
+  if (state.showUpload) {
+    const f = state.form;
+    if (state.formSuccess) {
+      html += `<div class="modal-overlay" onclick="closeUpload()"><div class="modal-box" onclick="event.stopPropagation()">
+        <div class="success-box">
+          <div class="success-icon">✨</div>
+          <div class="success-title">Testimonial Submitted</div>
+          <div class="success-sub">Thank you for sharing your story. It's now live in the vault!</div>
+          <button class="btn-primary" onclick="closeUpload()">Done</button>
+        </div>
+      </div></div>`;
+    } else {
+      const ready = f.name && f.headline && f.quote && f.category && !state.isUploading;
+      html += `<div class="modal-overlay" onclick="closeUpload()"><div class="modal-box" onclick="event.stopPropagation()">
+        <div class="form-header">
+          <div class="form-title">Share Your Story</div>
+          <button class="modal-close modal-close-dark" onclick="closeUpload()">✕</button>
+        </div>
+        <div class="form-body">
+          <div><label class="form-label">Your Name</label><input class="form-input" id="fn" placeholder="e.g. Sarah M." value="${esc(f.name)}" oninput="state.form.name=this.value"></div>
+          <div><label class="form-label">Headline</label><input class="form-input" id="fh" placeholder="e.g. From burnt out to thriving" value="${esc(f.headline)}" oninput="state.form.headline=this.value"></div>
+          <div><label class="form-label">Your Story</label><textarea class="form-input" id="fq" placeholder="Share your experience..." oninput="state.form.quote=this.value">${esc(f.quote)}</textarea></div>
+          <div>
+            <label class="form-label">Upload Video</label>
+            <div class="upload-zone" id="uz" onclick="document.getElementById('vi').click()"
+                 ondragover="event.preventDefault();this.classList.add('dragover')"
+                 ondragleave="this.classList.remove('dragover')"
+                 ondrop="event.preventDefault();this.classList.remove('dragover');handleDrop(event)">
+              <input type="file" id="vi" accept="video/*" style="display:none" onchange="handleFile(this)">
+              ${f.videoFileName ? `
+                <div class="upload-zone-file"><span style="font-size:20px">🎬</span><span class="upload-zone-filename">${f.videoFileName}</span><button class="upload-zone-remove" onclick="event.stopPropagation();rmFile()">✕</button></div>
+                ${state.isUploading?`<div class="upload-progress"><div class="upload-progress-bar"><div class="upload-progress-fill" style="width:${state.uploadProgress}%"></div></div><div class="upload-progress-text">Processing... ${state.uploadProgress}%</div></div>`:'<div style="font-size:11px;color:var(--gold-dark);margin-top:6px">✓ Ready to submit</div>'}
+              ` : `<div class="upload-zone-icon">📹</div><div class="upload-zone-text">Drag & drop your video here</div><div class="upload-zone-sub">or click to browse · MP4, MOV, WebM · up to 500MB</div>`}
+            </div>
+            <div class="form-hint">Record on your phone or computer and upload directly</div>
+          </div>
+          <div><label class="form-label">Category</label><div class="filter-tags">${CATEGORIES.map(c=>tag(c.label,c.emoji,f.category===c.id,false,`state.form.category='${c.id}';render()`)).join('')}</div></div>
+          <div><label class="form-label">I Identify As</label><div class="filter-tags">${PERSONAS.map(p=>tag(p.label,p.emoji,f.persona===p.id,false,`state.form.persona='${p.id}';render()`)).join('')}</div></div>
+          <button class="form-submit ${ready?'ready':'disabled'}" onclick="${ready?'submitForm()':''}" ${ready?'':'disabled'}>${state.isUploading?'Processing Video...':'Submit Testimonial'}</button>
+        </div>
+      </div></div>`;
+    }
+  }
+
+  document.getElementById('app').innerHTML = html;
+}
+
+function openDetail(id) { state.selectedId=id; render(); }
+function closeDetail() { state.selectedId=null; render(); }
+function openUpload() { state.showUpload=true; state.formSuccess=false; state.isUploading=false; state.uploadProgress=0; state.form={name:"",headline:"",quote:"",category:"",persona:"",videoFile:null,videoFileName:""}; render(); }
+function closeUpload() { state.showUpload=false; state.formSuccess=false; render(); }
+
+function toggleVideo() {
+  const v=document.getElementById('dv'), o=document.getElementById('dOverlay');
+  if(!v) return;
+  if(v.paused){v.play();o.classList.add('playing');o.innerHTML='';v.controls=true;v.addEventListener('pause',()=>{o.classList.remove('playing');o.innerHTML='<div class="detail-play-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>';v.controls=false;},{once:true});}
+}
+
+function handleFile(input){if(input.files&&input.files[0])processFile(input.files[0]);}
+function handleDrop(e){if(e.dataTransfer.files&&e.dataTransfer.files[0])processFile(e.dataTransfer.files[0]);}
+
+function processFile(file){
+  if(!file.type.startsWith('video/')){alert('Please upload a video file (MP4, MOV, or WebM)');return;}
+  if(file.size>500*1024*1024){alert('File is too large. Please upload a video under 500MB.');return;}
+  state.form.videoFile=file; state.form.videoFileName=file.name; state.isUploading=true; state.uploadProgress=0; render();
+  let p=0; const iv=setInterval(()=>{p+=Math.random()*15+5;if(p>=100){p=100;clearInterval(iv);state.isUploading=false;state.uploadProgress=100;render();}else{state.uploadProgress=Math.round(p);const f=document.querySelector('.upload-progress-fill'),tx=document.querySelector('.upload-progress-text');if(f)f.style.width=state.uploadProgress+'%';if(tx)tx.textContent='Processing... '+state.uploadProgress+'%';}},200);
+}
+
+function rmFile(){state.form.videoFile=null;state.form.videoFileName="";state.isUploading=false;state.uploadProgress=0;render();}
+
+function submitForm(){
+  const f=state.form;
+  if(!f.name||!f.headline||!f.quote||!f.category||state.isUploading)return;
+  const id='user-'+Date.now();
+  if(f.videoFile) videoBlobStore[id]=URL.createObjectURL(f.videoFile);
+  state.testimonials.unshift({id,name:f.name,headline:f.headline,quote:f.quote,category:f.category,persona:f.persona||'',thumbnailColor:COLORS[Math.floor(Math.random()*COLORS.length)],date:new Date().toISOString().split('T')[0]});
+  save(); state.formSuccess=true; render();
+}
+
+load(); render();
+</script>
+</body>
+</html>
