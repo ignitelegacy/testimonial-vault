@@ -7,17 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-@font-face { font-family:'Editors Note'; src:url('https://assets.cdn.filesafe.space/wcJWrJ0LKUsg51VQbi8P/media/69c6ee722e89d817b2599f76.ttf') format('truetype'); font-display:swap; }
+@font-face{font-family:'Editors Note';src:url('https://assets.cdn.filesafe.space/wcJWrJ0LKUsg51VQbi8P/media/69c6ee722e89d817b2599f76.ttf') format('truetype');font-display:swap}
 
-:root {
-  --cream:#f2e7de;--cream-light:#f8f1ea;--cream-dark:#edddcd;
-  --gold:#ad9565;--gold-dark:#9a8968;--gold-muted:#b8a47e;
-  --espresso:#3d3529;--espresso-light:#5a5244;
-  --warm-gray:#8a7e6e;--warm-gray-light:#a09888;
-  --surface:#fffbf7;
-  --font-display:'Editors Note',Georgia,serif;
-  --font-body:'Montserrat',sans-serif;
-}
+:root{--cream:#f2e7de;--cream-light:#f8f1ea;--cream-dark:#edddcd;--gold:#ad9565;--gold-dark:#9a8968;--gold-muted:#b8a47e;--espresso:#3d3529;--espresso-light:#5a5244;--warm-gray:#8a7e6e;--warm-gray-light:#a09888;--surface:#fffbf7;--font-display:'Editors Note',Georgia,serif;--font-body:'Montserrat',sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-body);background:var(--cream);color:var(--espresso);min-height:100vh;-webkit-font-smoothing:antialiased}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(154,137,104,0.2);border-radius:10px}
@@ -40,7 +32,7 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--espresso);
 .admin-bar{max-width:1200px;margin:0 auto 16px;padding:0 32px}
 .admin-bar-inner{background:#fef3cd;border:1px solid #f0d68a;border-radius:10px;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .admin-bar-text{font-size:13px;color:#856404;font-weight:500}
-.admin-tabs{display:flex;gap:6px}
+.admin-tabs{display:flex;gap:6px;flex-wrap:wrap}
 .admin-tab{padding:6px 16px;border-radius:100px;border:1.5px solid #f0d68a;background:transparent;font-size:12px;font-weight:500;cursor:pointer;color:#856404;transition:all 0.2s}
 .admin-tab.active{background:#856404;color:#fff;border-color:#856404}
 
@@ -52,6 +44,9 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--espresso);
 .tag:hover{border-color:rgba(154,137,104,0.4)}
 .tag.active{border-color:var(--gold-dark);background:rgba(154,137,104,0.1);color:var(--espresso-light);font-weight:600}
 .tag-sm{padding:4px 10px;font-size:11px}
+.tag-plain{padding:6px 14px;border-radius:100px;border:1.5px solid rgba(154,137,104,0.15);background:transparent;color:var(--warm-gray);font-size:11.5px;font-family:var(--font-body);font-weight:400;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:inline-block}
+.tag-plain:hover{border-color:rgba(154,137,104,0.4)}
+.tag-plain.active{border-color:var(--gold-dark);background:rgba(154,137,104,0.1);color:var(--espresso-light);font-weight:600}
 
 .search-wrap{position:relative;max-width:340px;margin-bottom:16px}
 .search-input{width:100%;padding:11px 16px 11px 42px;border-radius:100px;border:1.5px solid rgba(154,137,104,0.12);font-family:var(--font-body);font-size:13px;color:var(--espresso);background:var(--surface);outline:none;transition:border 0.2s}
@@ -63,17 +58,14 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--espresso);
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;padding:0 32px 80px;max-width:1200px;margin:0 auto}
 .card{background:var(--surface);border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid rgba(154,137,104,0.08);transition:all 0.35s cubic-bezier(0.4,0,0.2,1)}
 .card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(154,137,104,0.14)}
-
 .card-thumb{height:155px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .card-thumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .card-thumb-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.18);display:flex;align-items:center;justify-content:center;z-index:2}
 .card-play{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.22);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:transform 0.2s}
 .card:hover .card-play{transform:scale(1.08)}
-
 .card-written-thumb{height:155px;display:flex;align-items:center;justify-content:center;position:relative;padding:20px}
 .card-pending{position:absolute;top:11px;left:11px;background:#f0d68a;color:#856404;font-size:9px;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;z-index:3}
 .card-type-badge{position:absolute;top:11px;right:11px;background:rgba(0,0,0,0.4);color:#fff;font-size:9px;font-weight:600;padding:3px 10px;border-radius:100px;z-index:3;backdrop-filter:blur(4px)}
-
 .card-body{padding:16px 18px 18px}
 .card-tags{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
 .card-headline{font-family:var(--font-display);font-size:19px;font-weight:normal;color:var(--espresso);line-height:1.25;margin-bottom:8px}
@@ -81,7 +73,6 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--espresso);
 .card-author{margin-top:14px;display:flex;align-items:center;gap:9px}
 .card-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;flex-shrink:0}
 .card-author-name{font-size:12.5px;font-weight:500;color:var(--espresso-light)}
-
 .empty-state{text-align:center;padding:60px 20px;grid-column:1/-1}
 .loading{text-align:center;padding:60px 20px;grid-column:1/-1;color:var(--warm-gray)}
 .spinner{width:24px;height:24px;border:3px solid var(--cream-dark);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
@@ -92,15 +83,14 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--espresso);
 .modal-close:hover{background:rgba(255,255,255,0.35)}
 .modal-close-dark{background:transparent;border:1px solid rgba(154,137,104,0.2);color:var(--warm-gray);position:static}
 
-.detail-thumb{height:320px;display:flex;align-items:center;justify-content:center;border-radius:18px 18px 0 0;position:relative;overflow:hidden}
+.detail-thumb{height:340px;display:flex;align-items:center;justify-content:center;border-radius:18px 18px 0 0;position:relative;overflow:hidden}
 .detail-thumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 .detail-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;z-index:3;cursor:pointer;transition:background 0.3s}
 .detail-overlay.playing{background:transparent}
 .detail-play{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
-
 .detail-body{padding:24px 28px 28px}
 .detail-headline{font-family:var(--font-display);font-size:28px;font-weight:normal;color:var(--espresso);line-height:1.2;margin-bottom:16px}
-.detail-blockquote{font-size:14px;color:var(--espresso-light);line-height:1.7;padding:16px 20px;border-left:3px solid var(--gold-muted);background:rgba(173,149,101,0.05);border-radius:0 10px 10px 0;font-style:italic}
+.detail-written-text{font-size:15px;color:var(--espresso-light);line-height:1.8;margin-bottom:16px;white-space:pre-wrap}
 .detail-actions{margin-top:20px;padding-top:18px;border-top:1px solid rgba(154,137,104,0.1);display:flex;gap:10px;flex-wrap:wrap}
 .btn-download{padding:8px 18px;border-radius:100px;border:1.5px solid rgba(154,137,104,0.25);background:transparent;color:var(--gold-dark);font-family:var(--font-body);font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:all 0.2s}
 .btn-download:hover{background:rgba(154,137,104,0.08);border-color:var(--gold)}
@@ -111,10 +101,11 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--espresso);
 .form-title{font-family:var(--font-display);font-size:26px;color:var(--espresso)}
 .form-body{padding:20px 28px 28px;display:flex;flex-direction:column;gap:18px}
 .form-label{font-size:10px;font-weight:600;color:var(--espresso-light);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px;display:block}
+.form-sublabel{font-size:10px;font-weight:600;color:var(--warm-gray-light);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:6px;margin-top:12px;display:block}
 .form-input{width:100%;padding:12px 16px;border-radius:10px;border:1.5px solid rgba(154,137,104,0.15);font-family:var(--font-body);font-size:13px;color:var(--espresso);background:var(--cream-light);outline:none;transition:border 0.2s}
 .form-input:focus{border-color:var(--gold)}
 .form-input::placeholder{color:var(--warm-gray-light)}
-textarea.form-input{min-height:100px;resize:vertical}
+textarea.form-input{min-height:120px;resize:vertical}
 .form-hint{font-size:11px;color:var(--warm-gray-light);margin-top:5px}
 
 .type-toggle{display:flex;gap:3px;background:#EDE7E0;border-radius:10px;padding:3px}
@@ -128,7 +119,6 @@ textarea.form-input{min-height:100px;resize:vertical}
 .upload-fill{height:100%;background:linear-gradient(90deg,var(--gold-dark),var(--gold-muted));border-radius:4px;transition:width 0.3s}
 
 .hp-field{position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;width:0;z-index:-1}
-
 .form-submit{margin-top:4px;width:100%;padding:14px 0;border-radius:100px;border:none;color:#fff;font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s}
 .form-submit.ready{background:linear-gradient(135deg,var(--gold-dark),var(--gold-muted))}
 .form-submit.disabled{background:var(--cream-dark);cursor:not-allowed}
@@ -137,10 +127,12 @@ textarea.form-input{min-height:100px;resize:vertical}
 .success-title{font-family:var(--font-display);font-size:26px;color:var(--espresso);margin:14px 0 8px}
 .success-sub{font-size:13px;color:var(--warm-gray);margin-bottom:24px;line-height:1.5}
 
+.identity-group{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+
 @media(max-width:640px){
   .vault-title{font-size:32px}.vault-header{padding:32px 20px 24px}
   .filters-section{padding:0 20px 20px}.card-grid{padding:0 20px 60px;gap:16px}
-  .results-count{padding:0 20px 12px}.detail-thumb{height:220px}
+  .results-count{padding:0 20px 12px}.detail-thumb{height:240px}
 }
 </style>
 </head>
@@ -148,107 +140,125 @@ textarea.form-input{min-height:100px;resize:vertical}
 <div id="app"><div class="loading" style="padding:100px 20px"><div class="spinner"></div>Loading vault...</div></div>
 
 <script>
-// ─── Supabase Client ───
-const sb = supabase.createClient(
-  'https://tnyhifoauwyidzocwozp.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRueWhpZm9hdXd5aWR6b2N3b3pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMzc0MTAsImV4cCI6MjA5MTYxMzQxMH0.P2f58D0hBQqhAM5wARCStt2xLVPdtaVH9gO4hcqtkj0'
-);
+const sb=supabase.createClient('https://tnyhifoauwyidzocwozp.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRueWhpZm9hdXd5aWR6b2N3b3pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMzc0MTAsImV4cCI6MjA5MTYxMzQxMH0.P2f58D0hBQqhAM5wARCStt2xLVPdtaVH9gO4hcqtkj0');
 
-const CATS=[{id:"enagic-business",label:"Enagic Business",emoji:"💼"},{id:"enagic-health",label:"Enagic Health",emoji:"💧"},{id:"ignite-legacy",label:"Ignite Legacy",emoji:"🔥"},{id:"community",label:"Community",emoji:"🤝"},{id:"retreat",label:"Retreat",emoji:"✈️"}];
-const PERS=[{id:"mom",label:"Mom",emoji:"👩‍👧"},{id:"traveler",label:"Traveler",emoji:"🌍"},{id:"corporate-escapee",label:"Corporate Escapee",emoji:"🏃‍♀️"},{id:"health-seeker",label:"Health Seeker",emoji:"🌿"},{id:"entrepreneur",label:"Entrepreneur",emoji:"⚡"},{id:"student",label:"Student",emoji:"📚"},{id:"couple",label:"Couple",emoji:"💕"},{id:"side-hustler",label:"Side Hustler",emoji:"🌙"}];
+const CATS=[
+  {id:"enagic-business",label:"Enagic Business",emoji:"💼"},
+  {id:"enagic-products",label:"Enagic Products",emoji:"💧"},
+  {id:"multiple-products",label:"Starting on Multiple Products",emoji:"✦"},
+  {id:"ignite-legacy",label:"Ignite Legacy",emoji:"🔥"},
+  {id:"community",label:"Community",emoji:"🤝"},
+  {id:"retreat",label:"Retreat",emoji:"✈️"},
+];
+
+const IDENTITY={
+  "Lifestyle / Identity":["Mom","Dad","Stay-at-Home Parent","Couple","Family-Focused","Holistic Lifestyle","Faith-Led","Eco-Conscious","Luxury Lifestyle","Traveler","Non-Toxic Living","Biohacker","Athlete","Active Lifestyle"],
+  "Career / Background":["Entrepreneur","Corporate Escapee","9–5 Employee","Creative","Coach","Came from Low Ticket","Healthcare Worker","Teacher","Tradesperson","Retired"],
+  "Personality / Energy":["Skeptical at First","Beginner","Introvert","High Achiever","Spiritual Entrepreneur","Heart-Led Leader"]
+};
+const ALL_IDENTITIES=Object.values(IDENTITY).flat();
 const COLORS=["#c4a882","#8fa89a","#b89a7a","#a89abc","#d4a574","#c9b896","#9aab8f","#c4a0a0"];
 
-const isAdmin = new URLSearchParams(window.location.search).get('admin')==='true';
-let st={testimonials:[],loading:true,cat:'all',per:'all',q:'',adminFilter:'approved',showUpload:false,selId:null,formOk:false,uploading:false,upProg:0,form:{name:'',email:'',headline:'',quote:'',category:'',persona:'',type:'video',videoFile:null,videoFileName:'',honeypot:''}};
+const isAdmin=new URLSearchParams(window.location.search).get('admin')==='true';
+let st={testimonials:[],loading:true,cat:'all',per:'all',q:'',adminFilter:'approved',showUpload:false,selId:null,formOk:false,uploading:false,upProg:0,form:{name:'',email:'',headline:'',quote:'',category:'',personas:[],type:'video',videoFile:null,videoFileName:'',honeypot:''}};
 
-// ─── API ───
 async function fetchAll(){
-  st.loading=true; render();
-  try {
-    if(isAdmin){
-      const {data:approved}=await sb.from('testimonials').select('*').eq('status','approved').order('created_at',{ascending:false});
-      const {data:pending}=await sb.from('testimonials').select('*').eq('status','pending').order('created_at',{ascending:false});
-      st.testimonials=[...(pending||[]),...(approved||[])];
-    } else {
-      const {data,error}=await sb.from('testimonials').select('*').order('created_at',{ascending:false});
-      if(error) console.error('Fetch error:',error);
-      st.testimonials=data||[];
-    }
-  } catch(e){console.error(e);st.testimonials=[];}
-  st.loading=false; render();
+  st.loading=true;render();
+  try{
+    if(isAdmin){const{data}=await sb.from('testimonials').select('*').order('created_at',{ascending:false});st.testimonials=data||[]}
+    else{const{data}=await sb.from('testimonials').select('*').eq('status','approved').order('created_at',{ascending:false});st.testimonials=data||[]}
+  }catch(e){console.error(e);st.testimonials=[]}
+  st.loading=false;render();
 }
 
 async function uploadVideo(file){
   const ext=file.name.split('.').pop();
-  const fileName=`${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-  const {data,error}=await sb.storage.from('testimonial-videos').upload(fileName,file,{contentType:file.type,upsert:false});
-  if(error) throw error;
-  const {data:urlData}=sb.storage.from('testimonial-videos').getPublicUrl(fileName);
-  return urlData.publicUrl;
+  const fn=`${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+  const{error}=await sb.storage.from('testimonial-videos').upload(fn,file,{contentType:file.type});
+  if(error)throw error;
+  const{data}=sb.storage.from('testimonial-videos').getPublicUrl(fn);
+  return data.publicUrl;
 }
 
-async function submitT(row){
-  const {data,error}=await sb.from('testimonials').insert([row]);
-  if(error) throw error;
-  return data;
-}
+async function submitT(row){const{error}=await sb.from('testimonials').insert([row]);if(error)throw error}
+async function updateStatus(id,status){await sb.from('testimonials').update({status}).eq('id',id);await fetchAll()}
 
-async function updateStatus(id,status){
-  const {error}=await sb.from('testimonials').update({status}).eq('id',id);
-  if(error) console.error(error);
-  await fetchAll();
-}
-
-// ─── Helpers ───
 function getCat(id){return CATS.find(c=>c.id===id)}
-function getPer(id){return PERS.find(p=>p.id===id)}
 function fmtDate(d){return new Date(d).toLocaleDateString('en-US',{month:'long',year:'numeric'})}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;')}
-function getFiltered(){return st.testimonials.filter(t=>{if(isAdmin&&st.adminFilter!=='all'&&t.status!==st.adminFilter)return false;if(st.cat!=='all'&&t.category!==st.cat)return false;if(st.per!=='all'&&t.persona!==st.per)return false;if(st.q){const q=st.q.toLowerCase();return t.name.toLowerCase().includes(q)||t.headline.toLowerCase().includes(q)||t.quote.toLowerCase().includes(q)}return true})}
-function tag(l,e,a,sm,oc){return`<button class="tag ${a?'active':''} ${sm?'tag-sm':''}" ${oc?'onclick="'+oc+'"':''}><span style="font-size:${sm?'11':'13'}px">${e}</span>${l}</button>`}
+function getPersonas(t){try{return JSON.parse(t.persona||'[]')}catch(e){return t.persona?[t.persona]:[]}}
 
-// ─── Render ───
+function getFiltered(){return st.testimonials.filter(t=>{
+  if(isAdmin&&st.adminFilter!=='all'&&t.status!==st.adminFilter)return false;
+  if(st.cat!=='all'&&t.category!==st.cat)return false;
+  if(st.per!=='all'){const p=getPersonas(t);if(!p.includes(st.per))return false}
+  if(st.q){const q=st.q.toLowerCase();return t.name.toLowerCase().includes(q)||t.headline.toLowerCase().includes(q)||(t.quote||'').toLowerCase().includes(q)}
+  return true;
+})}
+
+function tag(l,e,a,sm,oc){return`<button class="tag ${a?'active':''} ${sm?'tag-sm':''}" ${oc?'onclick="'+oc+'"':''}><span style="font-size:${sm?'11':'13'}px">${e}</span>${l}</button>`}
+function ptag(l,a,oc){return`<button class="tag-plain ${a?'active':''}" ${oc?'onclick="'+oc+'"':''}>${l}</button>`}
+
 function render(){
   const items=getFiltered();
   let h='';
 
+  // Header
   h+=`<div class="vault-header"><div class="vault-header-inner"><div><div class="vault-eyebrow">The Testimonial Vault</div><h1 class="vault-title">Real Stories, Real Impact</h1><div class="vault-divider"></div><p class="vault-subtitle">Browse transformative stories from our community or share your own journey.</p></div><button class="btn-share" onclick="openUpload()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Share Your Story</button></div></div>`;
 
-  if(isAdmin){const pc=st.testimonials.filter(t=>t.status==='pending').length;h+=`<div class="admin-bar"><div class="admin-bar-inner"><div class="admin-bar-text">🔒 Admin View — ${pc} pending</div><div class="admin-tabs"><button class="admin-tab ${st.adminFilter==='approved'?'active':''}" onclick="st.adminFilter='approved';render()">Approved</button><button class="admin-tab ${st.adminFilter==='pending'?'active':''}" onclick="st.adminFilter='pending';render()">Pending (${pc})</button><button class="admin-tab ${st.adminFilter==='all'?'active':''}" onclick="st.adminFilter='all';render()">All</button></div></div></div>`}
+  // Admin
+  if(isAdmin){const pc=st.testimonials.filter(t=>t.status==='pending').length;const rc=st.testimonials.filter(t=>t.status==='rejected').length;
+    h+=`<div class="admin-bar"><div class="admin-bar-inner"><div class="admin-bar-text">🔒 Admin — ${pc} pending</div><div class="admin-tabs"><button class="admin-tab ${st.adminFilter==='approved'?'active':''}" onclick="st.adminFilter='approved';render()">Approved</button><button class="admin-tab ${st.adminFilter==='pending'?'active':''}" onclick="st.adminFilter='pending';render()">Pending (${pc})</button><button class="admin-tab ${st.adminFilter==='rejected'?'active':''}" onclick="st.adminFilter='rejected';render()">Rejected (${rc})</button><button class="admin-tab ${st.adminFilter==='all'?'active':''}" onclick="st.adminFilter='all';render()">All</button></div></div></div>`}
 
-  h+=`<div class="filters-section"><div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a09888" stroke-width="2.5" stroke-linecap="round" style="position:absolute;left:15px;top:50%;transform:translateY(-50%)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="search-input" placeholder="Search stories..." value="${esc(st.q)}" oninput="st.q=this.value;render()"></div><div class="filter-group"><div class="filter-label">Category</div><div class="filter-tags">${tag('All','✦',st.cat==='all',false,"st.cat='all';render()")}${CATS.map(c=>tag(c.label,c.emoji,st.cat===c.id,false,`st.cat='${c.id}';render()`)).join('')}</div></div><div class="filter-group"><div class="filter-label">Lifestyle</div><div class="filter-tags">${tag('All','✦',st.per==='all',false,"st.per='all';render()")}${PERS.map(p=>tag(p.label,p.emoji,st.per===p.id,false,`st.per='${p.id}';render()`)).join('')}</div></div></div>`;
+  // Filters
+  h+=`<div class="filters-section"><div class="search-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a09888" stroke-width="2.5" stroke-linecap="round" style="position:absolute;left:15px;top:50%;transform:translateY(-50%)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="search-input" placeholder="Search stories..." value="${esc(st.q)}" oninput="st.q=this.value;render()"></div>
+  <div class="filter-group"><div class="filter-label">Category</div><div class="filter-tags">${tag('All','✦',st.cat==='all',false,"st.cat='all';render()")}${CATS.map(c=>tag(c.label,c.emoji,st.cat===c.id,false,`st.cat='${c.id}';render()`)).join('')}</div></div>
+  <div class="filter-group"><div class="filter-label">Identity</div><div class="filter-tags">${ptag('All',st.per==='all',"st.per='all';render()")}${ALL_IDENTITIES.slice(0,12).map(p=>ptag(p,st.per===p,`st.per='${esc(p)}';render()`)).join('')}</div></div>
+  </div>`;
 
   h+=`<div class="results-count">${items.length} ${items.length===1?'story':'stories'} found</div><div class="card-grid">`;
 
   if(st.loading){h+=`<div class="loading"><div class="spinner"></div>Loading...</div>`}
   else if(!items.length){h+=`<div class="empty-state"><div style="font-size:40px;margin-bottom:12px">🔍</div><div style="font-size:15px;color:var(--warm-gray)">No stories found</div></div>`}
-  else{items.forEach((t,i)=>{const cat=getCat(t.category),per=getPer(t.persona),col=t.thumbnail_color||COLORS[i%8],bg=`linear-gradient(135deg,${col},${col}cc)`,isV=t.type==='video'&&t.video_url,isP=t.status==='pending';
+  else{items.forEach((t,i)=>{
+    const cat=getCat(t.category),personas=getPersonas(t),col=t.thumbnail_color||COLORS[i%8],bg=`linear-gradient(135deg,${col},${col}cc)`,isV=t.type==='video'&&t.video_url,isP=t.status==='pending';
     h+=`<div class="card" onclick="openDetail('${t.id}')" style="animation:fadeUp 0.5s ease ${i*0.04}s both">`;
-    if(isV){h+=`<div class="card-thumb" style="background:${bg}">${isP?'<div class="card-pending">Pending</div>':''}<div class="card-type-badge">📹 Video</div><video src="${t.video_url}" muted preload="metadata"></video><div class="card-thumb-overlay"><div class="card-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div></div>`}
-    else{h+=`<div class="card-written-thumb" style="background:${bg}">${isP?'<div class="card-pending">Pending</div>':''}<div class="card-type-badge">✍️ Written</div><div style="font-size:48px;opacity:0.3">❝</div></div>`}
-    h+=`<div class="card-body"><div class="card-tags">${cat?tag(cat.label,cat.emoji,true,true,''):''}${per?tag(per.label,per.emoji,false,true,''):''}</div><div class="card-headline">${esc(t.headline)}</div><div class="card-quote">"${esc(t.quote)}"</div><div class="card-author"><div class="card-avatar" style="background:linear-gradient(135deg,${col},#d4c4a8)">${(t.name||'?')[0]}</div><span class="card-author-name">${esc(t.name)}</span></div></div></div>`})}
+    if(isV){h+=`<div class="card-thumb" style="background:${bg}">${isP?'<div class="card-pending">Pending</div>':''}<div class="card-type-badge">Video</div><video src="${t.video_url}" muted preload="metadata"></video><div class="card-thumb-overlay"><div class="card-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div></div>`}
+    else{h+=`<div class="card-written-thumb" style="background:${bg}">${isP?'<div class="card-pending">Pending</div>':''}<div class="card-type-badge">Written</div><div style="font-size:48px;opacity:0.3">❝</div></div>`}
+    h+=`<div class="card-body"><div class="card-tags">${cat?tag(cat.label,cat.emoji,true,true,''):''}${personas.slice(0,2).map(p=>ptag(p,false,'')).join('')}</div><div class="card-headline">${esc(t.headline)}</div>${t.type==='written'&&t.quote?`<div class="card-quote">"${esc(t.quote)}"</div>`:''}<div class="card-author"><div class="card-avatar" style="background:linear-gradient(135deg,${col},#d4c4a8)">${(t.name||'?')[0]}</div><span class="card-author-name">${esc(t.name)}</span></div></div></div>`})}
   h+=`</div>`;
 
   // Detail modal
-  if(st.selId){const t=st.testimonials.find(x=>x.id===st.selId);if(t){const cat=getCat(t.category),per=getPer(t.persona),col=t.thumbnail_color||'#c4a882',bg=`linear-gradient(135deg,${col},${col}bb)`,isV=t.type==='video'&&t.video_url;
+  if(st.selId){const t=st.testimonials.find(x=>x.id===st.selId);if(t){
+    const cat=getCat(t.category),personas=getPersonas(t),col=t.thumbnail_color||'#c4a882',bg=`linear-gradient(135deg,${col},${col}bb)`,isV=t.type==='video'&&t.video_url;
     h+=`<div class="modal-overlay" onclick="closeDetail()"><div class="modal-box" onclick="event.stopPropagation()">`;
     if(isV){h+=`<div class="detail-thumb" style="background:${bg}"><button class="modal-close" onclick="closeDetail()">✕</button><video id="dv" src="${t.video_url}" preload="metadata"></video><div class="detail-overlay" id="dO" onclick="toggleV()"><div class="detail-play"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div></div>`}
-    else{h+=`<div class="detail-thumb" style="background:${bg}"><button class="modal-close" onclick="closeDetail()">✕</button><div style="font-size:72px;opacity:0.3;z-index:2">❝</div></div>`}
-    h+=`<div class="detail-body"><div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">${cat?tag(cat.label,cat.emoji,true,false,''):''}${per?tag(per.label,per.emoji,false,false,''):''}<span style="font-size:11px;padding:5px 12px;border-radius:100px;background:rgba(154,137,104,0.08);color:var(--warm-gray)">${t.type==='video'?'📹 Video':'✍️ Written'}</span></div><div class="detail-headline">${esc(t.headline)}</div><div class="detail-blockquote">"${esc(t.quote)}"</div><div style="margin-top:20px;display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,${col},#d4c4a8);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700">${(t.name||'?')[0]}</div><div><div style="font-size:14px;font-weight:600;color:var(--espresso)">${esc(t.name)}</div><div style="font-size:11.5px;color:var(--warm-gray-light)">${fmtDate(t.created_at)}</div></div></div><div class="detail-actions">${isV?`<a class="btn-download" href="${t.video_url}" download><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Video</a>`:''}${isAdmin&&t.status==='pending'?`<button class="btn-approve" onclick="event.stopPropagation();doApprove('${t.id}')">✓ Approve</button><button class="btn-reject" onclick="event.stopPropagation();doReject('${t.id}')">✕ Reject</button>`:''}</div></div></div></div>`}}
+    else{h+=`<div style="background:${bg};padding:32px 28px;border-radius:18px 18px 0 0;position:relative"><button class="modal-close" onclick="closeDetail()">✕</button><div style="max-width:500px"><div style="font-size:36px;color:rgba(255,255,255,0.3);margin-bottom:12px">❝</div><div style="font-size:16px;color:rgba(255,255,255,0.9);line-height:1.8;font-style:italic">${esc(t.quote)}</div></div></div>`}
+    h+=`<div class="detail-body"><div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">${cat?tag(cat.label,cat.emoji,true,false,''):''}${personas.map(p=>ptag(p,false,'')).join('')}</div>
+    <div class="detail-headline">${esc(t.headline)}</div>
+    <div style="margin-top:16px;display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,${col},#d4c4a8);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700">${(t.name||'?')[0]}</div><div><div style="font-size:14px;font-weight:600;color:var(--espresso)">${esc(t.name)}</div><div style="font-size:11.5px;color:var(--warm-gray-light)">${fmtDate(t.created_at)}</div></div></div>
+    <div class="detail-actions">${isV?`<a class="btn-download" href="${t.video_url}" download><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Video</a>`:''}${isAdmin&&t.status==='pending'?`<button class="btn-approve" onclick="event.stopPropagation();doApprove('${t.id}')">✓ Approve</button><button class="btn-reject" onclick="event.stopPropagation();doReject('${t.id}')">✕ Reject</button>`:''}</div></div></div></div>`}}
 
   // Upload modal
   if(st.showUpload){const f=st.form;
     if(st.formOk){h+=`<div class="modal-overlay" onclick="closeUpload()"><div class="modal-box" onclick="event.stopPropagation()"><div class="success-box"><div style="font-size:48px">✨</div><div class="success-title">Testimonial Submitted</div><div class="success-sub">Thank you for sharing your story! It will appear in the vault once reviewed.</div><button class="btn-share" onclick="closeUpload()">Done</button></div></div></div>`}
-    else{const ready=f.name&&f.email&&f.headline&&f.quote&&f.category&&!st.uploading;
+    else{
+      const ready=f.name&&f.email&&f.headline&&f.category&&!st.uploading&&(f.type==='video'?!!f.videoFile:!!f.quote);
       h+=`<div class="modal-overlay" onclick="closeUpload()"><div class="modal-box" onclick="event.stopPropagation()"><div class="form-header"><div class="form-title">Share Your Story</div><button class="modal-close modal-close-dark" onclick="closeUpload()">✕</button></div><div class="form-body">
-        <div><label class="form-label">Testimonial Type</label><div class="type-toggle"><button class="type-toggle-btn ${f.type==='video'?'active':''}" onclick="st.form.type='video';render()">📹 Video</button><button class="type-toggle-btn ${f.type==='written'?'active':''}" onclick="st.form.type='written';render()">✍️ Written</button></div></div>
+        <div><label class="form-label">Testimonial Type</label><div class="type-toggle"><button class="type-toggle-btn ${f.type==='video'?'active':''}" onclick="st.form.type='video';render()">Video</button><button class="type-toggle-btn ${f.type==='written'?'active':''}" onclick="st.form.type='written';render()">Written</button></div></div>
         <div><label class="form-label">Your Name</label><input class="form-input" placeholder="e.g. Sarah M." value="${esc(f.name)}" oninput="st.form.name=this.value"></div>
         <div><label class="form-label">Your Email</label><input class="form-input" type="email" placeholder="you@email.com" value="${esc(f.email)}" oninput="st.form.email=this.value"><div class="form-hint">Used to verify — not displayed publicly</div></div>
         <div><label class="form-label">Headline</label><input class="form-input" placeholder="e.g. From burnt out to thriving" value="${esc(f.headline)}" oninput="st.form.headline=this.value"></div>
-        <div><label class="form-label">Your Story</label><textarea class="form-input" placeholder="Share your experience..." oninput="st.form.quote=this.value">${esc(f.quote)}</textarea></div>
-        ${f.type==='video'?`<div><label class="form-label">Upload Video</label><div class="upload-zone" onclick="document.getElementById('vfi').click()" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');handleDrop(event)"><input type="file" id="vfi" accept="video/*" style="display:none" onchange="handleFile(this)">${f.videoFileName?`<div style="display:flex;align-items:center;justify-content:center;gap:8px"><span style="font-size:20px">🎬</span><span style="font-size:12px;font-weight:600;color:var(--gold-dark)">${esc(f.videoFileName)}</span><button style="background:none;border:none;color:var(--warm-gray);font-size:14px;cursor:pointer" onclick="event.stopPropagation();rmFile()">✕</button></div>${st.uploading?`<div class="upload-bar"><div class="upload-fill" style="width:${st.upProg}%"></div></div><div style="font-size:11px;color:var(--warm-gray);margin-top:4px;text-align:center">Uploading... ${st.upProg}%</div>`:'<div style="font-size:11px;color:var(--gold-dark);margin-top:6px">✓ Ready</div>'}`:`<div style="font-size:32px;margin-bottom:8px">📹</div><div style="font-size:13px;color:var(--warm-gray);font-weight:500">Drag & drop your video here</div><div style="font-size:11px;color:var(--warm-gray-light);margin-top:4px">or click to browse · MP4, MOV, WebM</div>`}</div><div class="form-hint">Record on your phone or computer and upload directly</div></div>`:''}
-        <div><label class="form-label">Category</label><div class="filter-tags">${CATS.map(c=>tag(c.label,c.emoji,f.category===c.id,false,`st.form.category='${c.id}';render()`)).join('')}</div></div>
-        <div><label class="form-label">I Identify As</label><div class="filter-tags">${PERS.map(p=>tag(p.label,p.emoji,f.persona===p.id,false,`st.form.persona='${p.id}';render()`)).join('')}</div></div>
+
+        ${f.type==='written'?`<div><label class="form-label">Your Testimonial</label><textarea class="form-input" placeholder="Share your experience in your own words..." oninput="st.form.quote=this.value">${esc(f.quote)}</textarea></div>`:`
+        <div><label class="form-label">Upload Video</label><div class="upload-zone" onclick="document.getElementById('vfi').click()" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');handleDrop(event)"><input type="file" id="vfi" accept="video/*" style="display:none" onchange="handleFile(this)">${f.videoFileName?`<div style="display:flex;align-items:center;justify-content:center;gap:8px"><span style="font-size:20px">🎬</span><span style="font-size:12px;font-weight:600;color:var(--gold-dark)">${esc(f.videoFileName)}</span><button style="background:none;border:none;color:var(--warm-gray);font-size:14px;cursor:pointer" onclick="event.stopPropagation();rmFile()">✕</button></div>${st.uploading?`<div class="upload-bar"><div class="upload-fill" style="width:${st.upProg}%"></div></div><div style="font-size:11px;color:var(--warm-gray);margin-top:4px;text-align:center">Uploading... ${st.upProg}%</div>`:'<div style="font-size:11px;color:var(--gold-dark);margin-top:6px">✓ Ready</div>'}`:`<div style="font-size:32px;margin-bottom:8px">📹</div><div style="font-size:13px;color:var(--warm-gray);font-weight:500">Drag & drop your video here</div><div style="font-size:11px;color:var(--warm-gray-light);margin-top:4px">or click to browse · MP4, MOV, WebM</div>`}</div></div>`}
+
+        <div><label class="form-label">Category <span style="color:#dc3545">*</span></label><div class="filter-tags">${CATS.map(c=>tag(c.label,c.emoji,f.category===c.id,false,`st.form.category='${c.id}';render()`)).join('')}</div></div>
+
+        <div><label class="form-label">Identity <span style="font-weight:400;color:var(--warm-gray-light);letter-spacing:0">(select all that apply)</span></label>
+        ${Object.entries(IDENTITY).map(([group,items])=>`<div class="form-sublabel">${group}</div><div class="identity-group">${items.map(p=>{const active=f.personas.includes(p);return`<button class="tag-plain ${active?'active':''}" onclick="togglePersona('${esc(p)}')">${p}</button>`}).join('')}</div>`).join('')}
+        </div>
+
         <div class="hp-field"><input type="text" value="${esc(f.honeypot)}" oninput="st.form.honeypot=this.value" tabindex="-1" autocomplete="off"></div>
         <button class="form-submit ${ready?'ready':'disabled'}" onclick="${ready?'doSubmit()':''}" ${ready?'':'disabled'}>${st.uploading?'Uploading...':'Submit Testimonial'}</button>
       </div></div></div>`}}
@@ -256,11 +266,12 @@ function render(){
   document.getElementById('app').innerHTML=h;
 }
 
-// ─── Handlers ───
+// Handlers
 function openDetail(id){st.selId=id;render()}
 function closeDetail(){st.selId=null;render()}
-function openUpload(){st.showUpload=true;st.formOk=false;st.uploading=false;st.upProg=0;st.form={name:'',email:'',headline:'',quote:'',category:'',persona:'',type:'video',videoFile:null,videoFileName:'',honeypot:''};render()}
+function openUpload(){st.showUpload=true;st.formOk=false;st.uploading=false;st.upProg=0;st.form={name:'',email:'',headline:'',quote:'',category:'',personas:[],type:'video',videoFile:null,videoFileName:'',honeypot:''};render()}
 function closeUpload(){st.showUpload=false;st.formOk=false;render()}
+function togglePersona(p){const i=st.form.personas.indexOf(p);if(i>=0)st.form.personas.splice(i,1);else st.form.personas.push(p);render()}
 
 function toggleV(){const v=document.getElementById('dv'),o=document.getElementById('dO');if(!v)return;if(v.paused){v.play();v.controls=true;o.classList.add('playing');o.innerHTML='';v.addEventListener('pause',()=>{o.classList.remove('playing');o.innerHTML='<div class="detail-play"><svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>';v.controls=false},{once:true})}}
 
@@ -271,9 +282,10 @@ function rmFile(){st.form.videoFile=null;st.form.videoFileName='';st.uploading=f
 
 async function doSubmit(){
   const f=st.form;
-  if(!f.name||!f.email||!f.headline||!f.quote||!f.category||st.uploading)return;
+  if(!f.name||!f.email||!f.headline||!f.category||st.uploading)return;
+  if(f.type==='video'&&!f.videoFile)return;
+  if(f.type==='written'&&!f.quote)return;
   if(f.honeypot){st.formOk=true;render();return}
-
   st.uploading=true;st.upProg=0;render();
   try{
     let videoUrl='';
@@ -282,9 +294,8 @@ async function doSubmit(){
       videoUrl=await uploadVideo(f.videoFile);
       clearInterval(prog);st.upProg=100;
     }
-    await submitT({name:f.name,email:f.email,headline:f.headline,quote:f.quote,category:f.category,persona:f.persona||'',type:f.type,video_url:videoUrl,thumbnail_color:COLORS[Math.floor(Math.random()*8)],status:'pending',honeypot:''});
-    st.uploading=false;st.formOk=true;render();
-    fetchAll();
+    await submitT({name:f.name,email:f.email,headline:f.headline,quote:f.type==='written'?f.quote:'',category:f.category,persona:JSON.stringify(f.personas),type:f.type,video_url:videoUrl,thumbnail_color:COLORS[Math.floor(Math.random()*8)],status:'pending',honeypot:''});
+    st.uploading=false;st.formOk=true;render();fetchAll();
   }catch(e){console.error('Submit error:',e);st.uploading=false;alert('Something went wrong: '+e.message);render()}
 }
 
